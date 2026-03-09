@@ -1,0 +1,28 @@
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()).optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
+const talks = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/talks' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    event: z.string(),
+    description: z.string(),
+    slides: z.string().optional(),
+    video: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
+export const collections = { blog, talks };

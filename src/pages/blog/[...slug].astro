@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.description}>
+  <article>
+    <header class="mb-10">
+      <p class="text-xs text-terminal-muted mb-2">{post.data.date}</p>
+      <h1 class="text-lg font-medium text-terminal-text mb-3">{post.data.title}</h1>
+      {post.data.tags && (
+        <div class="flex gap-2">
+          {post.data.tags.map((tag) => (
+            <span class="text-[10px] text-terminal-dim border border-terminal-border px-1.5 py-0.5 rounded">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+    <div class="prose prose-invert prose-sm max-w-none font-sans
+      prose-headings:font-mono prose-headings:text-terminal-text prose-headings:font-semibold
+      prose-a:text-terminal-cyan prose-a:no-underline hover:prose-a:underline
+      prose-code:text-terminal-green prose-code:bg-terminal-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+      prose-pre:bg-terminal-surface prose-pre:border prose-pre:border-terminal-border
+      prose-strong:text-terminal-text
+      prose-p:text-terminal-text prose-p:leading-relaxed
+      prose-li:text-terminal-text
+      prose-blockquote:border-terminal-dim prose-blockquote:text-terminal-muted">
+      <Content />
+    </div>
+    <div class="mt-12 pt-6 border-t border-terminal-border">
+      <a href="/blog" class="text-xs text-terminal-muted hover:text-terminal-green transition-colors duration-200 cursor-pointer">
+        &larr; back to /blog
+      </a>
+    </div>
+  </article>
+</Base>

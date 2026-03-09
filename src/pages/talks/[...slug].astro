@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const talks = await getCollection('talks');
+  return talks.map((talk) => ({
+    params: { slug: talk.id },
+    props: { talk },
+  }));
+}
+
+const { talk } = Astro.props;
+const { Content } = await render(talk);
+---
+
+<Base title={talk.data.title} description={talk.data.description}>
+  <article>
+    <header class="mb-10">
+      <p class="text-xs text-terminal-muted mb-2">{talk.data.date} // {talk.data.event}</p>
+      <h1 class="text-lg font-medium text-terminal-text mb-4">{talk.data.title}</h1>
+      <div class="flex gap-3">
+        {talk.data.slides && (
+          <a
+            href={talk.data.slides}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs text-terminal-cyan border border-terminal-border px-3 py-1.5 rounded hover:border-terminal-cyan transition-colors duration-200 cursor-pointer"
+          >
+            slides &nearr;
+          </a>
+        )}
+        {talk.data.video && (
+          <a
+            href={talk.data.video}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs text-terminal-cyan border border-terminal-border px-3 py-1.5 rounded hover:border-terminal-cyan transition-colors duration-200 cursor-pointer"
+          >
+            video &nearr;
+          </a>
+        )}
+      </div>
+      {talk.data.tags && (
+        <div class="flex gap-2 mt-3">
+          {talk.data.tags.map((tag) => (
+            <span class="text-[10px] text-terminal-dim border border-terminal-border px-1.5 py-0.5 rounded">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+    <div class="prose prose-invert prose-sm max-w-none font-sans
+      prose-headings:font-mono prose-headings:text-terminal-text prose-headings:font-semibold
+      prose-a:text-terminal-cyan prose-a:no-underline hover:prose-a:underline
+      prose-code:text-terminal-green prose-code:bg-terminal-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+      prose-pre:bg-terminal-surface prose-pre:border prose-pre:border-terminal-border
+      prose-strong:text-terminal-text
+      prose-p:text-terminal-text prose-p:leading-relaxed
+      prose-li:text-terminal-text
+      prose-blockquote:border-terminal-dim prose-blockquote:text-terminal-muted">
+      <Content />
+    </div>
+    <div class="mt-12 pt-6 border-t border-terminal-border">
+      <a href="/talks" class="text-xs text-terminal-muted hover:text-terminal-green transition-colors duration-200 cursor-pointer">
+        &larr; back to /talks
+      </a>
+    </div>
+  </article>
+</Base>

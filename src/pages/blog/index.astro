@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Base title="Blog">
+  <h1 class="text-xs text-terminal-muted uppercase tracking-widest mb-8">blog</h1>
+
+  {posts.length === 0 && (
+    <p class="text-terminal-muted text-sm">No posts yet. Check back soon.</p>
+  )}
+
+  <ul class="space-y-6">
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.id}`} class="group block cursor-pointer">
+          <div class="flex items-baseline gap-3">
+            <span class="text-terminal-muted text-xs font-mono shrink-0">{post.data.date}</span>
+            <span class="text-terminal-text group-hover:text-terminal-green transition-colors duration-200 font-medium">
+              {post.data.title}
+            </span>
+          </div>
+          <p class="text-sm text-terminal-muted mt-1 ml-[calc(10ch+0.75rem)] font-sans">
+            {post.data.description}
+          </p>
+          {post.data.tags && (
+            <div class="flex gap-2 mt-2 ml-[calc(10ch+0.75rem)]">
+              {post.data.tags.map((tag) => (
+                <span class="text-[10px] text-terminal-dim border border-terminal-border px-1.5 py-0.5 rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>

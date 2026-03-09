@@ -1,0 +1,47 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Nick C. Yeager', description = 'AI Solutions Architect. Speaker. Builder.' } = Astro.props;
+const fullTitle = title === 'Nick C. Yeager' ? title : `${title} — Nick C. Yeager`;
+---
+
+<!doctype html>
+<html lang="en" class="bg-terminal-bg">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>{fullTitle}</title>
+  </head>
+  <body class="bg-terminal-bg text-terminal-text font-mono min-h-screen antialiased">
+    <nav class="border-b border-terminal-border px-6 py-4">
+      <div class="max-w-3xl mx-auto flex items-center justify-between">
+        <a href="/" class="text-terminal-text font-medium hover:text-terminal-green transition-colors duration-200 cursor-pointer">
+          nick yeager
+        </a>
+        <div class="flex gap-6 text-sm text-terminal-muted">
+          <a href="/about" class="hover:text-terminal-text transition-colors duration-200 cursor-pointer">about</a>
+          <a href="/blog" class="hover:text-terminal-text transition-colors duration-200 cursor-pointer">blog</a>
+          <a href="/talks" class="hover:text-terminal-text transition-colors duration-200 cursor-pointer">talks</a>
+        </div>
+      </div>
+    </nav>
+    <main class="max-w-3xl mx-auto px-6 py-12">
+      <slot />
+    </main>
+    <footer class="border-t border-terminal-border px-6 py-6 mt-24">
+      <div class="max-w-3xl mx-auto text-xs text-terminal-muted">
+        built by a human, assisted by machines
+      </div>
+    </footer>
+  </body>
+</html>
