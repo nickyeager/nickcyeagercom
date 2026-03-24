@@ -7,12 +7,12 @@ export default {
         terminal: {
           bg: '#101010',
           surface: '#161616',
-          border: '#222222',
+          border: '#2A2A2A',
           green: '#6EBF8B',
           dim: '#4A9168',
           cyan: '#7EB8C9',
-          text: '#C8C8C8',
-          muted: '#585858',
+          text: '#DCDCDC',
+          muted: '#7A7A7A',
         },
       },
       fontFamily: {

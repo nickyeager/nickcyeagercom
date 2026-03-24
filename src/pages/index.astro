@@ -42,7 +42,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         background: rgba(5, 5, 8, 0.55);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(110, 191, 139, 0.08);
+        border: 1px solid rgba(140, 160, 220, 0.1);
         border-radius: 6px;
       }
 
@@ -69,15 +69,15 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
 
       .overlay a {
         font-size: clamp(0.7rem, 1.1vw, 0.82rem);
-        color: #6EBF8B;
+        color: #8EAADC;
         text-decoration: none;
         transition: color 0.3s ease, text-shadow 0.3s ease;
         width: fit-content;
       }
 
       .overlay a:hover {
-        color: #9FFFBE;
-        text-shadow: 0 0 12px rgba(110, 191, 139, 0.4);
+        color: #B8D0FF;
+        text-shadow: 0 0 12px rgba(140, 170, 220, 0.4);
       }
 
       .overlay .nav-links {
@@ -85,7 +85,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         gap: 16px;
         margin-top: 16px;
         padding-top: 12px;
-        border-top: 1px solid rgba(110, 191, 139, 0.15);
+        border-top: 1px solid rgba(140, 160, 220, 0.15);
       }
 
       .overlay .nav-links a {
@@ -127,7 +127,6 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
       <div class="links">
         <a href="https://github.com/nickyeager" target="_blank" rel="noopener">github</a>
         <a href="https://www.linkedin.com/in/nicholas-yeager/" target="_blank" rel="noopener">linkedin</a>
-        <a href="https://x.com/NickCYeager" target="_blank" rel="noopener">x</a>
         <a href="mailto:yeag123@gmail.com">yeag123@gmail.com</a>
       </div>
       <div class="nav-links">
@@ -171,12 +170,12 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         #define MIN_DIST 0.0005
         #define ITERATIONS 8
 
-        // Cosine palette — vivid greens & cyans
+        // Cosine palette — blue / violet / cyan
         vec3 palette(float t) {
-          vec3 a = vec3(0.45, 0.6, 0.5);
-          vec3 b = vec3(0.4, 0.5, 0.45);
-          vec3 c = vec3(1.0, 1.0, 0.8);
-          vec3 d = vec3(0.0, 0.25, 0.2);
+          vec3 a = vec3(0.4, 0.45, 0.65);
+          vec3 b = vec3(0.35, 0.4, 0.5);
+          vec3 c = vec3(0.8, 0.9, 1.0);
+          vec3 d = vec3(0.15, 0.2, 0.0);
           return a + b * cos(6.28318 * (c * t + d));
         }
 
@@ -274,12 +273,12 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
           float star = hash(floor(starUv));
           if (star > 0.997) {
             float twinkle = 0.5 + 0.5 * sin(uTime * 2.0 + star * 100.0);
-            col += vec3(0.4, 0.5, 0.45) * twinkle * smoothstep(0.997, 1.0, star);
+            col += vec3(0.4, 0.45, 0.6) * twinkle * smoothstep(0.997, 1.0, star);
           }
 
           // Subtle radial glow at center
           float centerGlow = exp(-2.5 * dot(uv, uv));
-          col += vec3(0.03, 0.08, 0.05) * centerGlow;
+          col += vec3(0.04, 0.05, 0.1) * centerGlow;
 
           // Raymarch
           float t = 0.0;
@@ -324,17 +323,17 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
 
             // Composite — bright
             col = baseCol * (0.35 + 0.8 * diff + 0.35 * diff2);
-            col += vec3(0.5, 0.7, 0.55) * spec * 0.7;
-            col += vec3(0.4, 0.7, 0.6) * rim * 0.45;
+            col += vec3(0.5, 0.55, 0.8) * spec * 0.7;
+            col += vec3(0.4, 0.5, 0.8) * rim * 0.45;
             col *= ao;
 
             // Depth fog — very light
             float fog = 1.0 - exp(-0.04 * t * t);
-            col = mix(col, vec3(0.02, 0.04, 0.03), fog);
+            col = mix(col, vec3(0.02, 0.02, 0.05), fog);
           } else {
             // Glow halo around fractal
             float glow = exp(-6.0 * minDist);
-            col += vec3(0.1, 0.25, 0.16) * glow;
+            col += vec3(0.1, 0.12, 0.3) * glow;
           }
 
           // Vignette
