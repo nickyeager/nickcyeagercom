@@ -133,6 +133,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         <a href="/about">about</a>
         <a href="/blog">blog</a>
         <a href="/talks">talks</a>
+        <a href="/fractal">what is this?</a>
       </div>
     </div>
 
@@ -165,50 +166,57 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         uniform vec2 uMouse;
         uniform float uZoom;
 
-        #define MAX_STEPS 120
-        #define MAX_DIST 6.0
-        #define MIN_DIST 0.0005
-        #define ITERATIONS 8
+        #define MAX_STEPS 150
+        #define MAX_DIST 20.0
+        #define MIN_DIST 0.0003
+        #define ITERATIONS 12
 
-        // Cosine palette — blue / violet / cyan
+        // Cosine palette — indigo / violet / steel
         vec3 palette(float t) {
-          vec3 a = vec3(0.4, 0.45, 0.65);
-          vec3 b = vec3(0.35, 0.4, 0.5);
-          vec3 c = vec3(0.8, 0.9, 1.0);
-          vec3 d = vec3(0.15, 0.2, 0.0);
+          vec3 a = vec3(0.28, 0.3, 0.58);
+          vec3 b = vec3(0.18, 0.2, 0.35);
+          vec3 c = vec3(1.0, 1.0, 1.0);
+          vec3 d = vec3(0.0, 0.05, 0.15);
           return a + b * cos(6.28318 * (c * t + d));
         }
 
-        // Mandelbulb distance estimator
-        vec2 mandelbulb(vec3 pos) {
+        // Mandelbox box fold
+        void boxFold(inout vec3 z, inout float dz) {
+          z = clamp(z, -1.0, 1.0) * 2.0 - z;
+        }
+
+        // Mandelbox sphere fold
+        void sphereFold(inout vec3 z, inout float dz) {
+          float minRadius2 = 0.25;
+          float fixedRadius2 = 1.0;
+          float r2 = dot(z, z);
+          if (r2 < minRadius2) {
+            float temp = fixedRadius2 / minRadius2;
+            z *= temp;
+            dz *= temp;
+          } else if (r2 < fixedRadius2) {
+            float temp = fixedRadius2 / r2;
+            z *= temp;
+            dz *= temp;
+          }
+        }
+
+        // Mandelbox distance estimator
+        vec2 mandelbox(vec3 pos) {
+          float scale = -1.77 + sin(uTime * 0.08) * 0.05;
           vec3 z = pos;
-          float dr = 1.0;
-          float r = 0.0;
-          float power = 8.0 + sin(uTime * 0.15) * 0.8;
+          float dz = 1.0;
           float trap = 1e10;
 
           for (int i = 0; i < ITERATIONS; i++) {
-            r = length(z);
-            if (r > 2.0) break;
-
-            float theta = acos(z.z / r);
-            float phi = atan(z.y, z.x);
-            dr = pow(r, power - 1.0) * power * dr + 1.0;
-
-            float zr = pow(r, power);
-            theta = theta * power;
-            phi = phi * power;
-
-            z = zr * vec3(
-              sin(theta) * cos(phi),
-              sin(phi) * sin(theta),
-              cos(theta)
-            ) + pos;
-
+            boxFold(z, dz);
+            sphereFold(z, dz);
+            z = scale * z + pos;
+            dz = dz * abs(scale) + 1.0;
             trap = min(trap, length(z));
           }
 
-          return vec2(0.5 * log(r) * r / dr, trap);
+          return vec2(length(z) / abs(dz), trap);
         }
 
         // Rotation matrix
@@ -226,7 +234,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         vec2 map(vec3 p) {
           mat3 rot = rotateXY(uMouse);
           p = rot * p;
-          return mandelbulb(p);
+          return mandelbox(p);
         }
 
         // Soft shadow / AO estimation
@@ -234,7 +242,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
           float occ = 0.0;
           float sca = 1.0;
           for (int i = 0; i < 5; i++) {
-            float h = 0.01 + 0.06 * float(i);
+            float h = 0.005 + 0.04 * float(i);
             float d = map(pos + h * nor).x;
             occ += (h - d) * sca;
             sca *= 0.75;
@@ -244,7 +252,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
 
         // Normal via central differences
         vec3 calcNormal(vec3 p) {
-          vec2 e = vec2(0.0005, 0.0);
+          vec2 e = vec2(0.0003, 0.0);
           return normalize(vec3(
             map(p + e.xyy).x - map(p - e.xyy).x,
             map(p + e.yxy).x - map(p - e.yxy).x,
@@ -261,9 +269,9 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
           vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution) / min(uResolution.x, uResolution.y);
 
           // Camera
-          float zoom = 4.5 / uZoom;
+          float zoom = 6.0 / uZoom;
           vec3 ro = vec3(0.0, 0.0, zoom);
-          vec3 rd = normalize(vec3(uv, -1.2));
+          vec3 rd = normalize(vec3(uv, -1.0));
 
           // Background — deep space
           vec3 col = vec3(0.01, 0.01, 0.02);
@@ -278,7 +286,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
 
           // Subtle radial glow at center
           float centerGlow = exp(-2.5 * dot(uv, uv));
-          col += vec3(0.04, 0.05, 0.1) * centerGlow;
+          col += vec3(0.03, 0.04, 0.12) * centerGlow;
 
           // Raymarch
           float t = 0.0;
@@ -315,25 +323,25 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
             float ao = calcAO(p, n);
 
             // Fractal coloring via orbit trap
-            vec3 baseCol = palette(res.y * 0.8 + uTime * 0.03);
+            vec3 baseCol = palette(res.y * 0.15 + uTime * 0.02);
 
             // Rim light — cyan tint
             float rim = 1.0 - max(dot(viewDir, n), 0.0);
             rim = pow(rim, 3.0);
 
             // Composite — bright
-            col = baseCol * (0.35 + 0.8 * diff + 0.35 * diff2);
-            col += vec3(0.5, 0.55, 0.8) * spec * 0.7;
-            col += vec3(0.4, 0.5, 0.8) * rim * 0.45;
+            col = baseCol * (0.3 + 0.75 * diff + 0.3 * diff2);
+            col += vec3(0.4, 0.45, 0.9) * spec * 0.6;
+            col += vec3(0.35, 0.4, 0.85) * rim * 0.4;
             col *= ao;
 
             // Depth fog — very light
-            float fog = 1.0 - exp(-0.04 * t * t);
+            float fog = 1.0 - exp(-0.008 * t * t);
             col = mix(col, vec3(0.02, 0.02, 0.05), fog);
           } else {
             // Glow halo around fractal
-            float glow = exp(-6.0 * minDist);
-            col += vec3(0.1, 0.12, 0.3) * glow;
+            float glow = exp(-12.0 * minDist);
+            col += vec3(0.06, 0.08, 0.18) * glow;
           }
 
           // Vignette
@@ -342,7 +350,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
           col *= vig;
 
           // Tone mapping — bright exposure
-          col *= 1.8;
+          col *= 1.3;
           col = col / (1.0 + col);
           col = pow(col, vec3(0.8));
 
@@ -354,7 +362,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
       const uniforms = {
         uResolution: { value: new THREE.Vector2(window.innerWidth * dpr, window.innerHeight * dpr) },
         uTime: { value: 0.0 },
-        uMouse: { value: new THREE.Vector2(0.1, 0.15) },
+        uMouse: { value: new THREE.Vector2(0.2, 0.25) },
         uZoom: { value: 1.0 },
       };
 
@@ -370,8 +378,8 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
       // ─── Interaction ───
       let isDragging = false;
       let prevX = 0, prevY = 0;
-      let autoAngleY = 0.15;
-      let autoAngleX = 0.1;
+      let autoAngleY = 0.25;
+      let autoAngleX = 0.2;
       let targetAngleY = autoAngleY;
       let targetAngleX = autoAngleX;
       let lastInteraction = 0;
@@ -424,7 +432,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
       canvas.addEventListener('wheel', (e) => {
         e.preventDefault();
         uniforms.uZoom.value *= e.deltaY > 0 ? 0.95 : 1.05;
-        uniforms.uZoom.value = Math.max(0.3, Math.min(3.0, uniforms.uZoom.value));
+        uniforms.uZoom.value = Math.max(0.3, Math.min(5.0, uniforms.uZoom.value));
         hasInteracted = true;
         lastInteraction = performance.now();
       }, { passive: false });

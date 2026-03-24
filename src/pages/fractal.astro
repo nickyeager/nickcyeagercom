@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="The Fractal" description="About the 3D Mandelbox fractal on the homepage.">
+  <h1 class="text-xs text-terminal-muted uppercase tracking-widest mb-8">the fractal</h1>
+
+  <div class="text-sm leading-relaxed text-terminal-text/80 space-y-4 font-sans max-w-xl">
+    <p>The shape on the <a href="/" class="text-terminal-cyan hover:underline">homepage</a> is a <strong class="text-terminal-text">Mandelbox</strong> — a class of fractal discovered by Tom Lowe in 2010. It's rendered in real-time in your browser using a technique called <strong class="text-terminal-text">raymarching</strong>.</p>
+
+    <p>Unlike a typical 3D model made of triangles, the Mandelbox doesn't exist as a mesh. Instead, every pixel on screen casts a ray into a mathematical field. The ray steps forward, checking at each point: "How close am I to the surface?" When it gets close enough, it stops. That's raymarching — and it's all happening on your GPU, roughly 120 times per pixel, 60 times per second.</p>
+  </div>
+
+  <div class="mt-10 pt-8 border-t border-terminal-border">
+    <h2 class="text-xs text-terminal-muted uppercase tracking-widest mb-4">how it works</h2>
+    <div class="text-sm leading-relaxed text-terminal-text/80 space-y-4 font-sans max-w-xl">
+      <p>The Mandelbox is built from two simple operations applied over and over:</p>
+
+      <ul class="space-y-2 ml-4">
+        <li><strong class="text-terminal-text">Box fold</strong> — if a coordinate goes past -1 or 1, reflect it back. This creates the angular, architectural geometry.</li>
+        <li><strong class="text-terminal-text">Sphere fold</strong> — if a point is inside a small sphere, scale it outward. If it's inside a larger sphere, invert it. This creates the recursive depth and infinite detail.</li>
+      </ul>
+
+      <p>Apply these two folds 12 times in sequence, then measure the distance. That single number — repeated for every pixel — gives you the entire shape. Change the scale parameter slightly and the geometry transforms completely: from crystalline lattices to organic caves to impossible architecture.</p>
+
+      <p>The color comes from tracking how the point moves during iteration (an <strong class="text-terminal-text">orbit trap</strong>), then mapping that trajectory through a cosine color palette. Lighting is physically-inspired: diffuse shading, specular highlights, ambient occlusion, rim lighting, and depth fog — all computed mathematically, with no pre-baked textures.</p>
+    </div>
+  </div>
+
+  <div class="mt-10 pt-8 border-t border-terminal-border">
+    <h2 class="text-xs text-terminal-muted uppercase tracking-widest mb-4">interact with it</h2>
+    <div class="text-sm leading-relaxed text-terminal-text/80 space-y-4 font-sans max-w-xl">
+      <ul class="space-y-2 ml-4">
+        <li><strong class="text-terminal-text">Drag</strong> to rotate the fractal in 3D space</li>
+        <li><strong class="text-terminal-text">Scroll</strong> to zoom in and out</li>
+        <li><strong class="text-terminal-text">Wait</strong> and it slowly rotates on its own</li>
+      </ul>
+
+      <p>The shape subtly breathes — the scale parameter oscillates over time, morphing the geometry between states. Zoom in and you'll find detail at every level. That's the nature of fractals: infinite complexity from finite rules.</p>
+    </div>
+  </div>
+
+  <div class="mt-10 pt-8 border-t border-terminal-border">
+    <h2 class="text-xs text-terminal-muted uppercase tracking-widest mb-4">why a fractal?</h2>
+    <div class="text-sm leading-relaxed text-terminal-text/80 space-y-4 font-sans max-w-xl">
+      <p>Simple rules producing complex, emergent behavior. That's what I find interesting about both fractals and AI. A language model is just matrix multiplication and attention — repeated billions of times. A Mandelbox is just box folds and sphere folds — repeated 12 times. Both produce something that feels like it shouldn't be possible from such basic ingredients.</p>
+
+      <p>The fractal is built with <strong class="text-terminal-text">Three.js</strong> and a custom <strong class="text-terminal-text">GLSL fragment shader</strong>. The full source is in the <a href="https://github.com/nickyeager/nickcyeagercom" target="_blank" rel="noopener" class="text-terminal-cyan hover:underline">site's repo</a>.</p>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <a href="/" class="text-xs text-terminal-muted hover:text-terminal-cyan transition-colors duration-200 cursor-pointer">
+      &larr; back to the fractal
+    </a>
+  </div>
+</Base>
