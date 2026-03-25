@@ -9,6 +9,24 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content="Nick C. Yeager" />
+    <link rel="canonical" href="https://nickcyeager.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://nickcyeager.com/" />
+    <meta property="og:site_name" content="Nick C. Yeager" />
+    <meta property="og:image" content="https://nickcyeager.com/og-image.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://nickcyeager.com/og-image.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,6 +34,28 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
       rel="stylesheet"
     />
     <title>{title}</title>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Nick C. Yeager",
+      "url": "https://nickcyeager.com",
+      "jobTitle": "AI Solutions Architect",
+      "description": "AI Solutions Architect, speaker, and builder based in Tucson, AZ.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Tucson",
+        "addressRegion": "AZ",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://github.com/nickyeager",
+        "https://www.linkedin.com/in/nicholas-yeager/"
+      ]
+    }
+    </script>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { overflow: hidden; background: #050508; }

@@ -2,10 +2,13 @@
 interface Props {
   title?: string;
   description?: string;
+  type?: 'website' | 'article';
 }
 
-const { title = 'Nick C. Yeager', description = 'AI Solutions Architect. Speaker. Builder.' } = Astro.props;
+const { title = 'Nick C. Yeager', description = 'AI Solutions Architect. Speaker. Builder.', type = 'website' } = Astro.props;
 const fullTitle = title === 'Nick C. Yeager' ? title : `${title} — Nick C. Yeager`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site);
 ---
 
 <!doctype html>
@@ -14,6 +17,24 @@ const fullTitle = title === 'Nick C. Yeager' ? title : `${title} — Nick C. Yea
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content="Nick C. Yeager" />
+    <link rel="canonical" href={canonicalUrl.href} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl.href} />
+    <meta property="og:site_name" content="Nick C. Yeager" />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,9 +42,29 @@ const fullTitle = title === 'Nick C. Yeager' ? title : `${title} — Nick C. Yea
       rel="stylesheet"
     />
     <title>{fullTitle}</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Nick C. Yeager",
+      "url": "https://nickcyeager.com",
+      "jobTitle": "AI Solutions Architect",
+      "description": "AI Solutions Architect, speaker, and builder based in Tucson, AZ.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Tucson",
+        "addressRegion": "AZ",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://github.com/nickyeager",
+        "https://www.linkedin.com/in/nicholas-yeager/"
+      ]
+    })} />
   </head>
   <body class="bg-terminal-bg text-terminal-text font-mono min-h-screen antialiased">
-    <nav class="border-b border-terminal-border px-6 py-4">
+    <nav class="border-b border-terminal-border px-6 py-4" aria-label="Main navigation">
       <div class="max-w-3xl mx-auto flex items-center justify-between">
         <a href="/" class="text-terminal-text font-medium hover:text-terminal-green transition-colors duration-200 cursor-pointer">
           nick yeager
