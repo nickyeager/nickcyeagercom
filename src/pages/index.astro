@@ -82,22 +82,30 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
 
       .overlay .nav-links {
         display: flex;
-        gap: 16px;
+        flex-wrap: wrap;
+        gap: 8px;
         margin-top: 16px;
-        padding-top: 12px;
+        padding-top: 14px;
         border-top: 1px solid rgba(140, 160, 220, 0.15);
       }
 
       .overlay .nav-links a {
-        color: #585858;
-        font-size: clamp(0.6rem, 1vw, 0.72rem);
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
+        color: #9AB0D8;
+        font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+        letter-spacing: 0.06em;
+        text-transform: none;
+        padding: 6px 14px;
+        border: 1px solid rgba(140, 160, 220, 0.2);
+        border-radius: 4px;
+        background: rgba(140, 160, 220, 0.05);
+        transition: all 0.25s ease;
       }
 
       .overlay .nav-links a:hover {
-        color: #C8C8C8;
-        text-shadow: none;
+        color: #D0DFFF;
+        background: rgba(140, 160, 220, 0.15);
+        border-color: rgba(140, 160, 220, 0.4);
+        text-shadow: 0 0 8px rgba(140, 170, 220, 0.3);
       }
 
       .hint {
@@ -113,8 +121,20 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
       }
 
       @media (max-width: 640px) {
-        .overlay { bottom: 20px; left: 20px; }
-        .hint { bottom: 20px; right: 20px; }
+        .overlay {
+          bottom: 16px;
+          left: 16px;
+          right: 16px;
+          padding: 16px 18px;
+        }
+        .overlay .nav-links {
+          gap: 6px;
+        }
+        .overlay .nav-links a {
+          padding: 8px 14px;
+          font-size: 0.72rem;
+        }
+        .hint { bottom: 16px; right: 16px; }
       }
     </style>
   </head>
@@ -130,10 +150,10 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         <a href="mailto:yeag123@gmail.com">yeag123@gmail.com</a>
       </div>
       <div class="nav-links">
-        <a href="/about">about</a>
-        <a href="/blog">blog</a>
-        <a href="/talks">talks</a>
-        <a href="/fractal">what is this?</a>
+        <a href="/about">About Me</a>
+        <a href="/blog">Blog</a>
+        <a href="/talks">Talks</a>
+        <a href="/fractal">About This Fractal</a>
       </div>
     </div>
 
