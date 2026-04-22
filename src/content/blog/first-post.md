@@ -6,7 +6,7 @@ tags: ["ai", "developer-tools", "open-source"]
 draft: true
 ---
 
-I wanted to work on RuleMetric for a number of reasons. First and foremost, I wanted to understand how context affected the output of these AI systems. In many ways, they still represent black boxes, even with ever increasing turns and complexity within the LLMs.
+I wanted to work on RuleMetric for a number of reasons. First and foremost, I wanted to understand how context affected the output of these AI systems. In many ways, they still represent black boxes, even with increased observability. 
 
 ## The Problem
 
