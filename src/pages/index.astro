@@ -1,5 +1,5 @@
 ---
-const title = 'Nick C. Yeager';
+const title = 'Nick Yeager';
 const description = 'AI Solutions Architect. Speaker. Builder.';
 ---
 
@@ -9,7 +9,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="author" content="Nick C. Yeager" />
+    <meta name="author" content="Nick Yeager" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="https://nickcyeager.com/" />
 
@@ -18,7 +18,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content="https://nickcyeager.com/" />
-    <meta property="og:site_name" content="Nick C. Yeager" />
+    <meta property="og:site_name" content="Nick Yeager" />
     <meta property="og:image" content="https://nickcyeager.com/og-image.png" />
     <meta property="og:locale" content="en_US" />
 
@@ -41,7 +41,7 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Nick C. Yeager",
+      "name": "Nick Yeager",
       "url": "https://nickcyeager.com",
       "jobTitle": "AI Solutions Architect",
       "description": "AI Solutions Architect, speaker, and builder based in Tucson, AZ.",
@@ -87,7 +87,22 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         border-radius: 6px;
       }
 
-      .overlay .name {
+      .overlay .profile {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .overlay .avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: 2px solid rgba(140, 160, 220, 0.2);
+        flex-shrink: 0;
+      }
+
+      .overlay .info .name {
         font-size: clamp(1.1rem, 2.5vw, 1.4rem);
         font-weight: 600;
         color: #e0e0e0;
@@ -95,11 +110,11 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
         margin-bottom: 2px;
       }
 
-      .overlay .tagline {
+      .overlay .info .tagline {
         font-size: clamp(0.65rem, 1.2vw, 0.78rem);
         color: #585858;
-        margin-bottom: 16px;
         letter-spacing: 0.04em;
+        margin-bottom: 6px;
       }
 
       .overlay .links {
@@ -183,12 +198,17 @@ const description = 'AI Solutions Architect. Speaker. Builder.';
     <canvas id="fractal"></canvas>
 
     <div class="overlay">
-      <div class="name">Nick C. Yeager</div>
-      <div class="tagline">AI Solutions Architect / Speaker / Tucson, AZ</div>
-      <div class="links">
-        <a href="https://github.com/nickyeager" target="_blank" rel="noopener">github</a>
-        <a href="https://www.linkedin.com/in/nicholas-yeager/" target="_blank" rel="noopener">linkedin</a>
-        <a href="mailto:yeag123@gmail.com">yeag123@gmail.com</a>
+      <div class="profile">
+        <img src="https://avatars.githubusercontent.com/u/21183?v=4" alt="Nick Yeager" class="avatar" width="64" height="64" />
+        <div class="info">
+          <div class="name">Nick Yeager</div>
+          <div class="tagline">AI Solutions Architect / Speaker / Tucson, AZ</div>
+          <div class="links">
+            <a href="https://github.com/nickyeager" target="_blank" rel="noopener">github</a>
+            <a href="https://www.linkedin.com/in/nicholas-yeager/" target="_blank" rel="noopener">linkedin</a>
+            <a href="mailto:yeag123@gmail.com">yeag123@gmail.com</a>
+          </div>
+        </div>
       </div>
       <div class="nav-links">
         <a href="/about">About Me</a>

@@ -5,8 +5,8 @@ interface Props {
   type?: 'website' | 'article';
 }
 
-const { title = 'Nick C. Yeager', description = 'AI Solutions Architect. Speaker. Builder.', type = 'website' } = Astro.props;
-const fullTitle = title === 'Nick C. Yeager' ? title : `${title} — Nick C. Yeager`;
+const { title = 'Nick Yeager', description = 'AI Solutions Architect. Speaker. Builder.', type = 'website' } = Astro.props;
+const fullTitle = title === 'Nick Yeager' ? title : `${title} — Nick Yeager`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og-image.png', Astro.site);
 ---
@@ -17,7 +17,7 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="author" content="Nick C. Yeager" />
+    <meta name="author" content="Nick Yeager" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl.href} />
 
@@ -26,7 +26,7 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl.href} />
-    <meta property="og:site_name" content="Nick C. Yeager" />
+    <meta property="og:site_name" content="Nick Yeager" />
     <meta property="og:image" content={ogImage.href} />
     <meta property="og:locale" content="en_US" />
 
@@ -48,7 +48,7 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Nick C. Yeager",
+      "name": "Nick Yeager",
       "url": "https://nickcyeager.com",
       "jobTitle": "AI Solutions Architect",
       "description": "AI Solutions Architect, speaker, and builder based in Tucson, AZ.",
