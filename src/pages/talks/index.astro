@@ -6,7 +6,7 @@ const talks = (await getCollection('talks'))
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
-<Base title="Talks">
+<Base title="Talks" description="Conference talks and presentations by Nick Yeager on AI, developer tools, and healthcare technology.">
   <h1 class="text-xs text-terminal-muted uppercase tracking-widest mb-8">talks</h1>
 
   {talks.length === 0 && (
