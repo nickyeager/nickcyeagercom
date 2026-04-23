@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Projects" description="Side projects by Nick C. Yeager — RuleMetric and FetchText.">
+  <h1 class="text-xs text-terminal-muted uppercase tracking-widest mb-8">projects</h1>
+
+  <div class="space-y-10 max-w-xl">
+
+    <div class="border border-terminal-border rounded-md p-6 bg-terminal-surface">
+      <div class="flex items-start justify-between gap-4 mb-3">
+        <h2 class="text-base font-semibold text-terminal-text">RuleMetric</h2>
+        <a href="https://rulemetric.com" target="_blank" rel="noopener noreferrer"
+          class="text-xs text-terminal-muted hover:text-terminal-green transition-colors duration-200 shrink-0 cursor-pointer">
+          rulemetric.com &nearr;
+        </a>
+      </div>
+      <p class="text-sm leading-relaxed text-terminal-text/70 font-sans mb-4">
+        Universal instruction management for AI coding tools. Write one canonical instruction set and convert it to 25+ formats — CLAUDE.md, .cursorrules, .github/copilot-instructions.md, and more. Captures context from AI sessions and evaluates instruction effectiveness.
+      </p>
+      <div class="flex gap-4 text-xs text-terminal-muted">
+        <a href="https://rulemetric.com" target="_blank" rel="noopener noreferrer"
+          class="hover:text-terminal-green transition-colors duration-200 cursor-pointer">
+          website
+        </a>
+        <a href="https://github.com/nickyeager/momento-mori" target="_blank" rel="noopener noreferrer"
+          class="hover:text-terminal-green transition-colors duration-200 cursor-pointer">
+          source
+        </a>
+      </div>
+    </div>
+
+    <div class="border border-terminal-border rounded-md p-6 bg-terminal-surface">
+      <div class="flex items-start justify-between gap-4 mb-3">
+        <h2 class="text-base font-semibold text-terminal-text">FetchText</h2>
+        <a href="https://fetchtext.io" target="_blank" rel="noopener noreferrer"
+          class="text-xs text-terminal-muted hover:text-terminal-green transition-colors duration-200 shrink-0 cursor-pointer">
+          fetchtext.io &nearr;
+        </a>
+      </div>
+      <p class="text-sm leading-relaxed text-terminal-text/70 font-sans mb-4">
+        A self-hosted AI package — an open, Docker Compose template that bootstraps a fully featured local AI and low-code development environment. Includes Ollama for local LLMs, Open WebUI, Supabase, N8N, Flowise, Neo4j, Langfuse, SearXNG, and more.
+      </p>
+      <div class="flex gap-4 text-xs text-terminal-muted">
+        <a href="https://fetchtext.io" target="_blank" rel="noopener noreferrer"
+          class="hover:text-terminal-green transition-colors duration-200 cursor-pointer">
+          website
+        </a>
+        <a href="https://github.com/nickyeager/fetchtext" target="_blank" rel="noopener noreferrer"
+          class="hover:text-terminal-green transition-colors duration-200 cursor-pointer">
+          source (open source)
+        </a>
+      </div>
+    </div>
+
+  </div>
+</Base>
