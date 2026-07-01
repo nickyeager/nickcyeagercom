@@ -65,7 +65,7 @@ const ogImage = new URL('/og-image.png', Astro.site);
     })} />
   </head>
   <body class="bg-terminal-bg text-terminal-text font-mono min-h-screen antialiased">
-    <nav class="border-b border-terminal-border px-6 py-4" aria-label="Main navigation">
+    <nav class="border-b border-terminal-border px-6 py-4 print:hidden" aria-label="Main navigation">
       <div class="max-w-3xl mx-auto flex items-center justify-between">
         <a href="/" class="text-terminal-text font-medium hover:text-terminal-green transition-colors duration-200 cursor-pointer">
           nick yeager
@@ -79,10 +79,10 @@ const ogImage = new URL('/og-image.png', Astro.site);
         </div>
       </div>
     </nav>
-    <main class="max-w-3xl mx-auto px-6 py-12">
+    <main class="max-w-3xl mx-auto px-6 py-12 print:py-0">
       <slot />
     </main>
-    <footer class="border-t border-terminal-border px-6 py-6 mt-24">
+    <footer class="border-t border-terminal-border px-6 py-6 mt-24 print:hidden">
       <div class="max-w-3xl mx-auto text-xs text-terminal-muted">
         built by a human somewhere in Tucson
       </div>

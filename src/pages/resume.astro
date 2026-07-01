@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base title="Resume" description="Nicholas Yeager — AI Solutions Architect, resume and work history.">
-  <div class="flex items-center justify-between mb-8">
+  <div class="flex items-center justify-between mb-8 print:hidden">
     <h1 class="text-xs text-terminal-muted uppercase tracking-widest">resume</h1>
     <a href="/resume.pdf" target="_blank" rel="noopener noreferrer"
       class="text-xs text-terminal-muted border border-terminal-border rounded px-3 py-1.5 hover:text-terminal-green hover:border-terminal-dim transition-colors duration-200 cursor-pointer">
@@ -14,7 +14,7 @@ import Base from '../layouts/Base.astro';
   <div class="max-w-xl font-sans">
 
     <!-- Header -->
-    <div class="mb-8">
+    <div class="mb-4">
       <h2 class="text-lg font-semibold text-terminal-text mb-1">Nicholas Yeager</h2>
       <p class="text-sm text-terminal-muted">Tucson, Arizona &middot; (760) 996-7075 &middot;
         <a href="mailto:yeag123@gmail.com" class="hover:text-terminal-green transition-colors duration-200 cursor-pointer">yeag123@gmail.com</a> &middot;
@@ -24,18 +24,18 @@ import Base from '../layouts/Base.astro';
     </div>
 
     <!-- Professional Summary -->
-    <section class="mb-8">
-      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-3 font-mono">Professional Summary</h3>
-      <p class="text-sm leading-relaxed text-terminal-text/80">
-        AI Solutions Architect with extensive experience leading cross-functional teams in healthcare, finance, entertainment, and nonprofit sectors. Built an industry-first AI pharmaceutical assistant, leveraging full-stack expertise to drive product innovation. Independently designs, builds, and ships AI/LLM products (rulemetric, tinyworlds, fetchtext). Track record of building venture-backed startups (AngelPad accelerator). Microsoft Certified: Azure AI Engineer Associate (Aug 2025).
+    <section class="mb-4">
+      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Professional Summary</h3>
+      <p class="text-sm leading-snug text-terminal-text/80">
+        AI Solutions Architect with extensive experience leading cross-functional teams in healthcare, finance, entertainment, and nonprofit sectors. Built an industry-first AI pharmaceutical assistant, leveraging full-stack expertise to drive product innovation. Independently designs, builds, and ships production AI/LLM products &mdash; a control plane for AI coding agents (rulemetric), an agent-driven game generator (tinyworlds), and an open self-hosted AI stack (fetchtext). Track record of building venture-backed startups (AngelPad accelerator). Microsoft Certified: Azure AI Engineer Associate (Aug 2025).
       </p>
     </section>
 
     <!-- Work Experience -->
-    <section class="mb-8">
-      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-4 font-mono">Work Experience</h3>
+    <section class="mb-4">
+      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Work Experience</h3>
 
-      <div class="space-y-6">
+      <div class="space-y-4">
         <div>
           <div class="flex items-start justify-between gap-4">
             <h4 class="text-sm font-semibold text-terminal-text">AI Solutions Architect</h4>
@@ -89,8 +89,8 @@ import Base from '../layouts/Base.astro';
     </section>
 
     <!-- Additional Experience -->
-    <section class="mb-8">
-      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-4 font-mono">Additional Experience</h3>
+    <section class="mb-4">
+      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Additional Experience</h3>
       <div class="space-y-2 text-sm text-terminal-text/70">
         <div class="flex items-start justify-between gap-4">
           <span><span class="text-terminal-text/90 font-medium">Software Engineer (contract)</span> &middot; Delta Thermal Inc</span>
@@ -124,23 +124,56 @@ import Base from '../layouts/Base.astro';
     </section>
 
     <!-- AI Products -->
-    <section class="mb-8">
-      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-3 font-mono">AI Products</h3>
-      <p class="text-sm text-terminal-text/70"><span class="text-terminal-text/90 font-medium">rulemetric, tinyworlds, fetchtext</span>: independently designed, built, and shipped AI/LLM products that extract structure and meaning from messy information. Owned roadmap, architecture, and build for each.</p>
+    <section class="mb-4">
+      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">AI Products</h3>
+      <p class="text-sm text-terminal-text/70 mb-4">Independently designed, built, and shipped production AI/LLM products end-to-end — owning architecture, roadmap, and delivery for each.</p>
+
+      <div class="space-y-4">
+        <div>
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-sm font-semibold text-terminal-text">RuleMetric &mdash; a control plane for AI coding agents</h4>
+            <span class="text-xs text-terminal-muted shrink-0">rulemetric.com</span>
+          </div>
+          <p class="text-xs text-terminal-cyan mb-2">TypeScript/Node monorepo &middot; API, web dashboard, npm CLI, background eval worker</p>
+          <ul class="text-sm text-terminal-text/70 space-y-1 list-disc list-inside">
+            <li>Built a platform that captures how teams use Claude Code, Cursor, and Copilot and measures which instructions actually improve agent output.</li>
+            <li>Designed a two-layer HTTPS proxy capturing full LLM context across 25+ providers (Anthropic, OpenAI, Bedrock, Azure AI, Databricks), plus an evaluation harness that A/B-tests instruction sets against real prompts.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-sm font-semibold text-terminal-text">TinyWorlds &mdash; text/image &rarr; playable 3D world</h4>
+            <span class="text-xs text-terminal-muted shrink-0">tinyworlds.us</span>
+          </div>
+          <p class="text-xs text-terminal-cyan mb-2">FastAPI + SSE &middot; agent-orchestration pipeline &middot; Next.js</p>
+          <ul class="text-sm text-terminal-text/70 space-y-1 list-disc list-inside">
+            <li>Architected a streaming backend orchestrating Claude Code subprocesses through a skill pipeline to generate and compile Godot/Bevy games to WebAssembly, playable in-browser from a prompt.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-sm font-semibold text-terminal-text">FetchText &mdash; open-source self-hosted AI stack</h4>
+            <span class="text-xs text-terminal-muted shrink-0">fetchtext.io</span>
+          </div>
+          <p class="text-sm text-terminal-text/70 mt-1">Open Docker Compose template that bootstraps a full local AI/low-code environment (Ollama, Open WebUI, Supabase, n8n, Flowise, Neo4j, Langfuse, SearXNG).</p>
+        </div>
+      </div>
     </section>
 
     <!-- Education -->
-    <section class="mb-8">
-      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-3 font-mono">Education</h3>
+    <section class="mb-4">
+      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Education</h3>
       <p class="text-sm text-terminal-text/80">Bachelor of Arts in Political Science and Government</p>
       <p class="text-xs text-terminal-muted">University of Arizona &middot; Tucson, Arizona</p>
       <p class="text-sm text-terminal-text/80 mt-3">AngelPad &middot; Seed-stage startup accelerator (2017&ndash;2018)</p>
     </section>
 
     <!-- Skills -->
-    <section class="mb-8">
-      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-4 font-mono">Skills</h3>
-      <div class="space-y-3 text-sm">
+    <section class="mb-4">
+      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Skills</h3>
+      <div class="space-y-1 text-sm">
         <div>
           <span class="text-terminal-text/90 font-medium">Leadership:</span>
           <span class="text-terminal-text/70"> Team leadership, Cross-functional collaboration, Public speaking</span>
@@ -166,7 +199,7 @@ import Base from '../layouts/Base.astro';
 
     <!-- Hobbies -->
     <section>
-      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-3 font-mono">Hobbies</h3>
+      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Hobbies</h3>
       <p class="text-sm text-terminal-text/70">Pickleball Coach</p>
     </section>
 
