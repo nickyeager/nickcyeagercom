@@ -27,8 +27,34 @@ import Base from '../layouts/Base.astro';
     <section class="mb-4">
       <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Professional Summary</h3>
       <p class="text-sm leading-snug text-terminal-text/80">
-        AI Solutions Architect with extensive experience leading cross-functional teams in healthcare, finance, entertainment, and nonprofit sectors. Built an industry-first AI pharmaceutical assistant, leveraging full-stack expertise to drive product innovation. Independently designs, builds, and ships production AI/LLM products &mdash; a control plane for AI coding agents (rulemetric), an agent-driven game generator (tinyworlds), and an open self-hosted AI stack (fetchtext). Track record of building venture-backed startups (AngelPad accelerator). Microsoft Certified: Azure AI Engineer Associate (Aug 2025).
+        AI Solutions Architect who designs and ships production AI systems, with a focus on agent evaluation, observability, and LLM integration. Builds AI-driven pharmaceutical solutions at ScriptSave and independently built RuleMetric, a platform for measuring changes to AI coding-agent instructions. More than a decade of software engineering and cross-functional delivery across healthcare, finance, and startups. Former Co-Founder & CTO of Outlast (AngelPad). Earned Microsoft Certified: Azure AI Engineer Associate (Aug 2025).
       </p>
+      <p class="text-sm leading-snug text-terminal-text mt-2">
+        <span class="text-terminal-green font-medium">Selected product:</span>
+        <a href="https://rulemetric.com" target="_blank" rel="noopener noreferrer" class="text-terminal-cyan hover:text-terminal-green transition-colors duration-200">RuleMetric</a> captures AI coding sessions and compares prompt, rule, and memory changes against a baseline, reporting quality, cost, and latency to help developers decide what to keep.
+      </p>
+    </section>
+
+    <!-- Selected AI Product -->
+    <section class="mb-4">
+      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Selected AI Product</h3>
+      <p class="text-sm text-terminal-text/70 mb-4">Independently designed, built, and shipped RuleMetric, owning architecture, product roadmap, and delivery.</p>
+
+      <div class="space-y-4">
+        <div>
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-sm font-semibold text-terminal-text">RuleMetric &mdash; evaluation and observability for AI coding agents</h4>
+            <span class="text-xs text-terminal-muted shrink-0">rulemetric.com</span>
+          </div>
+          <p class="text-xs text-terminal-cyan mb-2">TypeScript/Node monorepo &middot; API, dashboard, eval worker &middot; public npm CLI: <span class="text-terminal-text/90">@rulemetric/cli</span></p>
+          <ul class="text-sm text-terminal-text/70 space-y-1 list-disc list-inside">
+            <li>Built session-capture integrations for Claude Code, Codex, Cursor, and GitHub Copilot, turning coding-session evidence into proposed instruction and workflow changes.</li>
+            <li>Designed controlled evaluations that compare a proposed change with a baseline using the same harness, model, tasks, and grading approach, reporting quality, cost, latency, sample size, and uncertainty.</li>
+            <li>Shipped a TypeScript/Node platform spanning an API, dashboard, background evaluation worker, and public npm CLI, with hosted and local deployment options.</li>
+          </ul>
+        </div>
+
+      </div>
     </section>
 
     <!-- Work Experience -->
@@ -123,45 +149,6 @@ import Base from '../layouts/Base.astro';
       </div>
     </section>
 
-    <!-- AI Products -->
-    <section class="mb-4">
-      <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">AI Products</h3>
-      <p class="text-sm text-terminal-text/70 mb-4">Independently designed, built, and shipped production AI/LLM products end-to-end — owning architecture, roadmap, and delivery for each.</p>
-
-      <div class="space-y-4">
-        <div>
-          <div class="flex items-start justify-between gap-4">
-            <h4 class="text-sm font-semibold text-terminal-text">RuleMetric &mdash; a control plane for AI coding agents</h4>
-            <span class="text-xs text-terminal-muted shrink-0">rulemetric.com</span>
-          </div>
-          <p class="text-xs text-terminal-cyan mb-2">TypeScript/Node monorepo &middot; API, web dashboard, npm CLI, background eval worker</p>
-          <ul class="text-sm text-terminal-text/70 space-y-1 list-disc list-inside">
-            <li>Built a platform that captures how teams use Claude Code, Cursor, and Copilot and measures which instructions actually improve agent output.</li>
-            <li>Designed a two-layer HTTPS proxy capturing full LLM context across 25+ providers (Anthropic, OpenAI, Bedrock, Azure AI, Databricks), plus an evaluation harness that A/B-tests instruction sets against real prompts.</li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="flex items-start justify-between gap-4">
-            <h4 class="text-sm font-semibold text-terminal-text">TinyWorlds &mdash; text/image &rarr; playable 3D world</h4>
-            <span class="text-xs text-terminal-muted shrink-0">tinyworlds.us</span>
-          </div>
-          <p class="text-xs text-terminal-cyan mb-2">FastAPI + SSE &middot; agent-orchestration pipeline &middot; Next.js</p>
-          <ul class="text-sm text-terminal-text/70 space-y-1 list-disc list-inside">
-            <li>Architected a streaming backend orchestrating Claude Code subprocesses through a skill pipeline to generate and compile Godot/Bevy games to WebAssembly, playable in-browser from a prompt.</li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="flex items-start justify-between gap-4">
-            <h4 class="text-sm font-semibold text-terminal-text">FetchText &mdash; open-source self-hosted AI stack</h4>
-            <span class="text-xs text-terminal-muted shrink-0">fetchtext.io</span>
-          </div>
-          <p class="text-sm text-terminal-text/70 mt-1">Open Docker Compose template that bootstraps a full local AI/low-code environment (Ollama, Open WebUI, Supabase, n8n, Flowise, Neo4j, Langfuse, SearXNG).</p>
-        </div>
-      </div>
-    </section>
-
     <!-- Education -->
     <section class="mb-4">
       <h3 class="text-xs text-terminal-muted uppercase tracking-widest mb-2 font-mono">Education</h3>
@@ -180,7 +167,7 @@ import Base from '../layouts/Base.astro';
         </div>
         <div>
           <span class="text-terminal-text/90 font-medium">AI & Cloud:</span>
-          <span class="text-terminal-text/70"> Azure AI Services, LLM Integration, Prompt Engineering</span>
+          <span class="text-terminal-text/70"> Agent evaluation, Controlled experiments, LLM observability, Azure AI Services, LLM integration, Prompt engineering</span>
         </div>
         <div>
           <span class="text-terminal-text/90 font-medium">Backend:</span>
